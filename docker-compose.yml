@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  back-mcc:
+    build: .
+    command: npm run start:dev
+    restart: always
+    environment:
+      NODE_ENV: ${NODE_ENV}
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3082:3000
+    depends_on:
+      - db-mcc
+    links:
+      - db-mcc
+
+  db-mcc:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: "${DATABASE_NAME}"
+      MYSQL_USER: "${DB_USERNAME}"
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+    volumes:
+      - ./data-db:/var/lib/mysql
+    ports:
+      - "2605:3306"
