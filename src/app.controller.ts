@@ -10,22 +10,6 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get('mediaplayers')
-  mediaplayers(): string {
-    return 'route mediaPlayers'
-  }
-
-
-  @Get('mediaplayers/filter')
-  getMediaplayerfilter(): string {
-    return `mediaplayer -------- filter`
-  }
-  
-  @Get('mediaplayers/:mediaplayerid')
-  getMediaplayerbyId(@Param('mediaplayerid') mediaplayerid: any): string {
-    return `mediaplayer ${mediaplayerid}`
-  }
-
   @Get('categories')
   getCategories(@Query('limit') limit: number=100, @Query('offset') offset = 25, @Query('brand') brand: string) {
     return `limit: ${limit} ----- Offset: ${offset} brand: ${brand}`
